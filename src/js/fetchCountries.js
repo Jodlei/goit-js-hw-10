@@ -12,6 +12,12 @@ function fetchCountries(name) {
       return response.json();
     })
     .then(data => {
+      if (data.length > 10) {
+        Notiflix.Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
+      }
+      console.log(data);
       return data;
     })
     .catch(err => {
