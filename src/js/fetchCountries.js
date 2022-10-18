@@ -51,10 +51,10 @@ function createAllCountryMurkup(data) {
         name: { official },
         flags: { svg },
       } = el;
-      return `<li class="county-list__item">
-        <img class="country-list__icon" src="${svg}" alt="${official} flag" width="50"
-        height="50">
-        <p class="country-list__name">${official}</p>
+      return `<li class="countryes-list__item">
+        <img class="countryes-list__icon" src="${svg}" alt="${official} flag" width="100"
+        height="100">
+        <p class="countryes-list__name">${official}</p>
       </li>`;
     })
     .join('');
@@ -74,13 +74,13 @@ function createOneCountryMurkup(data) {
       } = item;
       return `<div class="country-info__box">
       <img
-        class="country-list__icon"
+        class="one-country-list__icon"
         src="${svg}"
         alt="${official} flag"
         width="100"
         heigth="100"
       />
-      <p class="country-list__name">${official}</p>
+      <p class="one-country-list__name">${official}</p>
     </div>
     <ul class="info-list">
       <li class="info-list__item"><span class="info-list__accent">Capital:</span> ${
