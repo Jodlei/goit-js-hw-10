@@ -1,11 +1,5 @@
-export { fetchCountries, refs, createAllCountryMurkup, createOneCountryMurkup };
+export { fetchCountries };
 import Notiflix from 'notiflix';
-
-const refs = {
-  input: document.querySelector('#search-box'),
-  countryInfo: document.querySelector('.country-info'),
-  countryList: document.querySelector('.country-list'),
-};
 
 function fetchCountries(country) {
   return fetch(
@@ -18,81 +12,10 @@ function fetchCountries(country) {
       return response.json();
     })
     .then(data => {
-      if (data.length > 10) {
-        console.log(data.length);
-        Notiflix.Notify.info(
-          'Too many matches found. Please enter a more specific name.'
-        );
-        return;
-      }
-
-      if (data.length > 1) {
-        refs.countryList.innerHTML = '';
-        refs.countryInfo.innerHTML = '';
-        createAllCountryMurkup(data);
-      }
-      console.log(data);
-      if ((data.length = 1)) {
-        refs.countryList.innerHTML = '';
-        refs.countryInfo.innerHTML = '';
-        createOneCountryMurkup(data);
-      }
+      return data;
     })
     .catch(err => {
       console.log(err);
       Notiflix.Notify.info('Oops, there is no country with that name');
     });
-}
-
-function createAllCountryMurkup(data) {
-  const murkup = data
-    .map(el => {
-      const {
-        name: { official },
-        flags: { svg },
-      } = el;
-      return `<li class="countryes-list__item">
-        <img class="countryes-list__icon" src="${svg}" alt="${official} flag" width="100"
-        height="100">
-        <p class="countryes-list__name">${official}</p>
-      </li>`;
-    })
-    .join('');
-
-  refs.countryList.innerHTML = murkup;
-}
-
-function createOneCountryMurkup(data) {
-  const murkup = data
-    .map(item => {
-      const {
-        name: { official },
-        flags: { svg },
-        capital,
-        population,
-        languages,
-      } = item;
-      return `<div class="country-info__box">
-      <img
-        class="one-country-list__icon"
-        src="${svg}"
-        alt="${official} flag"
-        width="100"
-        heigth="100"
-      />
-      <p class="one-country-list__name">${official}</p>
-    </div>
-    <ul class="info-list">
-      <li class="info-list__item"><span class="info-list__accent">Capital:</span> ${
-        capital[0]
-      }</li>
-      <li class="info-list__item"><span class="info-list__accent">Population:</span> ${population}</li>
-      <li class="info-list__item"><span class="info-list__accent">Languages:</span> ${Object.values(
-        languages
-      ).join(', ')}</li>
-    </ul>`;
-    })
-    .join('');
-
-  refs.countryList.innerHTML = murkup;
 }
