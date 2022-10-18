@@ -27,10 +27,14 @@ function fetchCountries(country) {
       }
 
       if (data.length > 1) {
+        refs.countryList.innerHTML = '';
+        refs.countryInfo.innerHTML = '';
         createAllCountryMurkup(data);
       }
       console.log(data);
       if ((data.length = 1)) {
+        refs.countryList.innerHTML = '';
+        refs.countryInfo.innerHTML = '';
         createOneCountryMurkup(data);
       }
     })
