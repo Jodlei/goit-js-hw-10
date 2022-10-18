@@ -14,8 +14,9 @@ const refs = {
 refs.input.addEventListener('input', debounce(onFormInput, DEBOUNCE_DELAY));
 
 function onFormInput(e) {
-  if (e.target.value === '') {
+  const country = e.target.value.trim();
+  if (country === '') {
     return;
   }
-  fetchCountries(e.target.value);
+  fetchCountries(country);
 }
